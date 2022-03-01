@@ -1,4 +1,4 @@
-package CSP;
+package CSP.C202112;
 
 import java.util.Scanner;
 

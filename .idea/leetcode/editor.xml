@@ -388,6 +388,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$USER_HOME$/IdeaProjects/LeetCodeDaily/leetcode/editor/cn/P553OptimalDivision.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$USER_HOME$/IdeaProjects/LeetCodeDaily/leetcode/editor/cn/doc/content/P553OptimalDivision.md" />
+              <option name="frontendQuestionId" value="leetcode-cn.com553" />
+              <option name="host" value="leetcode-cn.com" />
+              <option name="path" value="$USER_HOME$/IdeaProjects/LeetCodeDaily/leetcode/editor/cn/P553OptimalDivision.java" />
+              <option name="titleSlug" value="optimal-division" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
