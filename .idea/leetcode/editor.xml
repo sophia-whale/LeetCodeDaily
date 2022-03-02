@@ -399,6 +399,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$USER_HOME$/IdeaProjects/LeetCodeDaily/leetcode/editor/cn/P6ZigzagConversion.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$USER_HOME$/IdeaProjects/LeetCodeDaily/leetcode/editor/cn/doc/content/P6ZigzagConversion.md" />
+              <option name="frontendQuestionId" value="leetcode-cn.com6" />
+              <option name="host" value="leetcode-cn.com" />
+              <option name="path" value="$USER_HOME$/IdeaProjects/LeetCodeDaily/leetcode/editor/cn/P6ZigzagConversion.java" />
+              <option name="titleSlug" value="zigzag-conversion" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
