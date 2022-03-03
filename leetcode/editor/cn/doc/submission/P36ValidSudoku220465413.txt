@@ -1,4 +1,4 @@
-class Solution {
+class RainyUniverse.Solution {
     public boolean isValidSudoku(char[][] board) {
         boolean[] isVisitRow = new boolean[9];
         boolean[] isVisitColumn = new boolean[9];
