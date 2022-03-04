@@ -3,7 +3,7 @@ package RainyUniverse;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-class Solution {
+class Solution2 {
     static class Node{
         int x;
         int y;
@@ -96,7 +96,7 @@ class Solution {
                 {0,0,0,0,0,0,0,1,1,1,0,0,0},
                 {0,0,0,0,0,0,0,1,1,0,0,0,0}};
         /**/
-        Solution solution = new Solution();
-        // System.out.println(solution.maxAreaOfIsland(grid));
+        Solution2 solution = new Solution2();
+        System.out.println(solution.maxAreaOfIsland(grid));
     }
 }
