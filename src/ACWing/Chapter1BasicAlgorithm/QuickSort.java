@@ -1,5 +1,6 @@
 package ACWing.Chapter1BasicAlgorithm;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class QuickSort {
@@ -10,17 +11,23 @@ public class QuickSort {
         for (int i = 0; i < n; i++) {
             nums[i] = sc.nextInt();
         }
+        quickSort(nums, 0, n - 1);
+        System.out.println(Arrays.toString(nums));
+    }
 
-        int left = 0;
-        int right = n - 1;
-        int cur = nums[0];
-        int start = 0;
+    public static void quickSort(int[] nums, int start, int end) {
+        if (start >= end)return;
+        int base = nums[start];
+        int left = start;
+        int right = end;
         while (left < right) {
-            while (nums[right] > cur) right--;
-            if (left < right && nums[right] < cur) nums[start] = nums[right];
-            while (nums[left] < cur) left++;
-            if (left < right && nums[left] > cur) nums[right] = nums[left];
+            while (left < right && nums[right] > base) right--;
+            if (left < right) nums[right] = nums[right];
+            while (left < right && nums[left] < base) left++;
+            if (left < right) nums[left] = nums[right];
         }
-        nums[left] = cur;
+        nums[left] = base;
+        quickSort(nums, start, left - 1);
+        quickSort(nums, left + 1, end);
     }
 }
