@@ -1,6 +1,8 @@
 package Offer;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
 
 class ListNode {
@@ -39,7 +41,20 @@ public class Offer {
 
         int[] preorder = {3,9,20,15,7};
         int[] inorder = {9,3,15,20,7};
-        System.out.println(buildTree(preorder, inorder).val);
+        TreeNode treeNode = buildTree(preorder, inorder);
+        //队列实现层次遍历
+        Deque<TreeNode> queue = new ArrayDeque<TreeNode>();
+        queue.addLast(treeNode);
+        while(!queue.isEmpty()){
+            TreeNode curNode = queue.removeFirst();
+            System.out.println(curNode.val);
+            if(curNode.left != null){
+                queue.addLast(curNode.left);
+            }
+            if(curNode.right != null){
+                queue.addLast(curNode.right);
+            }
+        }
     }
 
     public static int findRepeatNumber(int[] nums) {
@@ -116,18 +131,32 @@ public class Offer {
         return subTree(preorder, inorder, 0, 0, preorder.length - 1);
     }
 
+    /***
+     *
+     * @param preorder
+     * @param inorder
+     * @param root
+     * @param left 在中序遍历中 左子树的第一个节点的索引
+     * @param right
+     * @return
+     */
     public static TreeNode subTree(int[] preorder, int[] inorder, int root, int left, int right) {
         if (left > right) return null;
+        //根节点初始化
         TreeNode treeNode = new TreeNode(preorder[root]);
         int iRoot = left;
+        // 查找当前根节点在中序遍历数组中的index
         for (int i = left; i < right; i++) {
             if (preorder[root] == inorder[i]) {
                 iRoot = i;
             }
         }
+        //左子树
         treeNode.left = subTree(preorder, inorder, root + 1, left, iRoot - 1);
         // pre_root_idx 当前的根  左子树的长度 = 左子树的左边-右边 (idx-1 - in_left_idx +1) 。最后+1就是右子树的根了
         treeNode.right = subTree(preorder, inorder, root + iRoot - left + 1, iRoot + 1, right);
         return treeNode;
     }
+
+
 }
