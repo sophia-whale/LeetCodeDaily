@@ -12,8 +12,20 @@ public class Fib {
         for (List l : lists) {
             System.out.println(l);
         }*/
-        char[][] board = {{'a','b'},{'c','d'}};
-        String word = "abcd";
+        char[][] board = {
+                {'a','a','a'},
+                {'a','b','b'},
+                {'a','b','b'},
+                {'b','b','b'},
+                {'b','b','b'},
+                {'a','a','a'},
+                {'b','b','b'},
+                {'a','b','b'},
+                {'a','a','b'},
+                {'a','b','a'}
+        };
+        char[][] board1 = {{'a'}};
+        String word = "b";
         System.out.println(exist(board, word));
     }
 
@@ -44,29 +56,50 @@ public class Fib {
     // 上下左右
     static int[] x = {-1, 1, 0, 0};
     static int[] y = {0, 0, -1, 1};
+    static int[][] isVisited;
     public static boolean exist(char[][] board, String word) {
-        boolean isExist = false;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == word.charAt(0)) {
+        boolean isExist;
+        int m = board.length;
+        int n = board[0].length;
+        isVisited = new int[m][n];
+        // 查找board中与word首字母相同的字符的位置
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                isExist = exist(board, word, i, j, 0);
+                /*if (board[i][j] == word.charAt(0)) {
+                    isVisited[i][j] = 1;
                     for (int k = 0; k < 4; k++) {
-                        isExist = isExist || exist(board, word, i + x[k], j + y[k], 1);
+                        boolean cur = ;
+                        if (!cur && (i + x[k] >= 0 && i + x[k] < board.length) && (j + y[k] >= 0 && j + y[k] < board[0].length)) isVisited[i + x[k]][j + y[k]] = 0;
+
                     }
-                }
+                }*/
+                if (isExist) return true;
             }
         }
-        return isExist;
+        return false;
     }
 
     public static boolean exist(char[][] board, String word,int i, int j, int target) {
-        if (i < 0 || i >= board.length || j < 0 || j >= board.length) return false;
-        if (target == word.length()) return true;
+        if (board[i][j] != word.charAt(target)) return false;
+        if (target == word.length() - 1) return true;
         boolean isExist = false;
-        if (board[i][j] == word.charAt(target)) {
-            for (int k = 0; k < 4; k++) {
-                isExist = isExist || exist(board, word, i + x[k], j + y[k], ++target);
+        isVisited[i][j] = 1;
+        for (int k = 0; k < 4; k++) {
+            if (i + x[k] >= 0 && i + x[k] < board.length && j + y[k] >= 0 && j + y[k] < board[0].length) {
+                if (isVisited[i + x[k]][j + y[k]] == 0) {
+                    isExist = exist(board, word, i + x[k], j + y[k], target + 1);
+                }
+                if (isExist) break;
             }
         }
+        isVisited[i][j] = 0;
+        /*
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return false;
+
+        if (board[i][j] == word.charAt(target) && isVisited[i][j] == 0) {
+            isVisited[i][j] = 1;
+        }*/
         return isExist;
     }
 
