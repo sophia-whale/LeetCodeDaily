@@ -29,7 +29,7 @@ Notice that the sequence has to be strictly increasing.
 
 public class NumberOfLongestIncreasingSubsequence {
     public static void main(String[] args) {
-        int[] nums = {1,1,1,1,1,1,1};
+        int[] nums = {1,1,1,3,1,2,1};
         System.out.println(findNumberOfLIS(nums));
     }
 

@@ -16,9 +16,9 @@ import java.util.Scanner;
 public class LongestWordinDictionarythroughDeleting {
     public static void main(String[] args) {
         String s = "apple";//abpcplea
-        String[] strings = {"zxc","vbn"};
+        String[] strings = {"ale","apple","monkey","plea"};
         List<String> dictionary = Arrays.asList(strings);
-        System.out.println(findLongestWord(s, dictionary));//"ba","ab","a","b"  "ale","apple","monkey","plea"
+        System.out.println(findLongestWord(s, dictionary));//"ba","ab","a","b"  "ale","apple","monkey","plea" "zxc","vbn"
     }
 
     public static String findLongestWord(String s, List<String> dictionary) {
