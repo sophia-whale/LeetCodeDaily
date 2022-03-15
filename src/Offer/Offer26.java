@@ -57,7 +57,20 @@ public class Offer26 {
     }
 
     public boolean isSymmetric(TreeNode root) {
+        if (root == null) return true;
+        TreeNode base = root.left;
+        return compare(root.right, base);
+    }
 
-        return true;
+    public boolean compare(TreeNode root, TreeNode base) {
+        if ((root == null && base != null) || (base == null && root != null)) return false;
+        if (root == null && base == null) return true;
+        if (root.val != base.val) return false;
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        boolean left = compare(root.left, base.left);
+        boolean right = compare(root.right, base.right);
+        return left && right;
     }
 }
