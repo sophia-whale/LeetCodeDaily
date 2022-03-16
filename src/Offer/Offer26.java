@@ -1,12 +1,28 @@
 package Offer;
 
+import java.util.*;
+
 public class Offer26 {
-   class TreeNode {
+   static class TreeNode {
      int val;
      TreeNode left;
      TreeNode right;
      TreeNode(int x) { val = x; }
    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(3);
+        TreeNode rootL = root.left = new TreeNode(9);
+        TreeNode rootR = root.right = new TreeNode(20);
+        rootL.left = new TreeNode(6);
+        rootR.left = new TreeNode(15);
+        rootR.right = new TreeNode(7);
+        List<List<Integer>> lists = levelOrder(root);
+        for (List<Integer> cur: lists) {
+            System.out.println(cur);
+        }
+
+    }
 
     public boolean isSubStructure(TreeNode A, TreeNode B) {
         if (A == null || B == null) return false;
@@ -72,5 +88,37 @@ public class Offer26 {
         boolean left = compare(root.left, base.left);
         boolean right = compare(root.right, base.right);
         return left && right;
+    }
+
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> lists = new ArrayList<>();
+        if (root == null) return lists;
+        Deque<TreeNode> nodeQueue = new ArrayDeque<>();
+        nodeQueue.add(root);
+        List<Integer> layer = new ArrayList<>();
+        int end = 1;
+        int num = 1;
+        while (!nodeQueue.isEmpty()) {
+            TreeNode cur = nodeQueue.peek();
+            if (cur.left != null) {
+                nodeQueue.add(cur.left);
+                end++;
+            }
+
+            if (cur.right != null) {
+                nodeQueue.add(cur.right);
+                end++;
+            }
+            nodeQueue.remove();
+            end--;
+            num--;
+            layer.add(cur.val);
+            if (num == 0) {
+                num = end;
+                lists.add(layer);
+                layer = new ArrayList<>();
+            }
+        }
+        return lists;
     }
 }
