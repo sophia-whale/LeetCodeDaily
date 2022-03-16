@@ -95,8 +95,9 @@ public class Offer26 {
         if (root == null) return lists;
         Deque<TreeNode> nodeQueue = new ArrayDeque<>();
         nodeQueue.add(root);
-        List<Integer> layer = new ArrayList<>();
-        int end = 1;
+        LinkedList<Integer> layer = new LinkedList<>();
+        int layerNum = 1;
+        /*int end = 1;
         int num = 1;
         while (!nodeQueue.isEmpty()) {
             TreeNode cur = nodeQueue.peek();
@@ -118,6 +119,27 @@ public class Offer26 {
                 lists.add(layer);
                 layer = new ArrayList<>();
             }
+        }*/
+
+        // 优化，扫描完根节点后得到第二层的全部节点 当前queue的长度即为第二层结点数
+        // 以此类推 for循环扫描完第二层节点，将第三层节点全部加入队列，以此类推
+        while (!nodeQueue.isEmpty()) {
+            int queueL = nodeQueue.size();
+            for (int i = 0; i < queueL; i++) {
+                TreeNode cur = nodeQueue.poll();
+                if (layerNum % 2 == 1) layer.addLast(cur.val);
+                else layer.addFirst(cur.val);
+                if (cur.left != null) {
+                    nodeQueue.add(cur.left);
+                }
+
+                if (cur.right != null) {
+                    nodeQueue.add(cur.right);
+                }
+            }
+            layerNum++;
+            lists.add(layer);
+            layer = new LinkedList<>();
         }
         return lists;
     }
