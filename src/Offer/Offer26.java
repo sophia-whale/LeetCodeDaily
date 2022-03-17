@@ -90,6 +90,7 @@ public class Offer26 {
         return left && right;
     }
 
+    // 层次遍历
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> lists = new ArrayList<>();
         if (root == null) return lists;
@@ -142,5 +143,25 @@ public class Offer26 {
             layer = new LinkedList<>();
         }
         return lists;
+    }
+
+    // 后序遍历
+    int cur;
+    public boolean verifyPostorder(int[] postorder) {
+        int length = postorder.length;
+        if (length < 3) return true;
+        cur = length - 1;
+        build(postorder, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        // 若节点能够全部成功加入树中，则cur=-1
+        return cur < 0;
+    }
+
+    public void build(int[] postorder, int low, int high) {
+        if (cur < 0) return;
+        int base = postorder[cur];
+        if (base <= low || base >= high) return;
+        cur--;
+        build(postorder, base, high);// 先构建右子树
+        build(postorder, low, base);// 再构建左子树
     }
 }
