@@ -18,21 +18,27 @@ public class Offer35 {
 
     public Node copyRandomList(Node head) {
         if (head == null) return null;
+        int length = 0;
         Node node = new Node(head.val);
-        Node cur = node;
+        Node res = node;
         // 记录每个索引的node
         LinkedList<Node> nodeList = new LinkedList<>();
-        // 记录每个索引对应的random node的索引
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
         while (head != null) {
-            if (head.next != null) cur.next = new Node(head.next.val);
-            else cur.next = null;
-            nodeList.add(cur);
-            /*if (head.random != null) cur.next = head.random;
-            else cur.random = null;*/
+            nodeList.add(head);
             head = head.next;
-            cur = cur.next;
+            length++;
         }
-        return node;
+
+        for (int i = 0; i < length - 1; i++) {
+            Node cur = new Node(nodeList.get(0).val);
+            cur.next = nodeList.get(i + 1);
+            cur.random = nodeList.get(i).random;
+            node.next = cur;
+            node = node.next;
+        }
+        node.next = null;
+        node.random = nodeList.get(length - 1);
+
+        return res;
     }
 }
