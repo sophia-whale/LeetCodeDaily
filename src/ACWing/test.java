@@ -1,9 +1,9 @@
 package ACWing;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class test {
     /*public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class test {
             map.put(key, list);
         }
     }*/
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int s = sc.nextInt();
@@ -49,5 +49,8 @@ public class test {
                 System.out.println(res[i]);
             }
         }
+    }*/
+    public static void main(String[] args) {
+        System.out.println(14/5);
     }
 }
