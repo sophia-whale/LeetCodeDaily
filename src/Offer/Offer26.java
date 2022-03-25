@@ -17,7 +17,7 @@ public class Offer26 {
         rootL.left = new TreeNode(6);
         rootR.left = new TreeNode(15);
         rootR.right = new TreeNode(7);
-        List<List<Integer>> lists = levelOrder(root);
+        List<List<Integer>> lists = levelOrderEnd(root);
         for (List<Integer> cur: lists) {
             System.out.println(cur);
         }
@@ -90,8 +90,8 @@ public class Offer26 {
         return left && right;
     }
 
-    // 层次遍历
-    public static List<List<Integer>> levelOrder(TreeNode root) {
+    // 层次遍历并记录每层的结束节点
+    public static List<List<Integer>> levelOrderEnd(TreeNode root) {
         List<List<Integer>> lists = new ArrayList<>();
         if (root == null) return lists;
         Deque<TreeNode> nodeQueue = new ArrayDeque<>();
@@ -143,6 +143,26 @@ public class Offer26 {
             layer = new LinkedList<>();
         }
         return lists;
+    }
+
+    // 层次遍历
+    public static int[] levelOrder(TreeNode root) {
+        if (root == null) return new int[0];
+        List<Integer> nums = new ArrayList<>();
+        Deque<TreeNode> nodeQueue = new ArrayDeque<>();
+        nodeQueue.add(root);
+        while (!nodeQueue.isEmpty()) {
+            TreeNode cur = nodeQueue.poll();
+            nums.add(cur.val);
+            if (cur.left != null) nodeQueue.add(cur.left);
+            if (cur.right != null) nodeQueue.add(cur.right);
+        }
+
+        int[] res = new int[nums.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = nums.get(i);
+        }
+        return res;
     }
 
     // 后序遍历
