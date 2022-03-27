@@ -165,6 +165,115 @@ public class Offer26 {
         return res;
     }
 
+    // 前序遍历 递归
+    // List<Integer> nums = new LinkedList<>();
+    public List<Integer> preorderTraversal(TreeNode root) {
+        if (root == null) return new LinkedList<>();
+        nums.add(root.val);
+        if (root.left != null) preorderTraversal(root.left);
+        if (root.right != null) preorderTraversal(root.right);
+        return nums;
+    }
+
+    List<Integer> nums = new LinkedList<>();
+    // 前序遍历 非递归
+    /*
+     * @Author Whale Feng
+     * @Description
+     * //TODO 根据前序遍历过程可知，中左右。
+     *    使用栈实现先进后出，使得右节点能够最后遍历，对于每一个根结点都先访问后，再依次将右节点和左节点放入
+     * @Date 19:40 2022/3/26
+     * @Param [root]
+     * @return java.util.List<java.lang.Integer>
+     **/
+    public List<Integer> preorderTraversalNon(TreeNode root) {
+        if (root == null) return new LinkedList<>();
+        Stack<TreeNode> nodes = new Stack<>();
+        nodes.add(root);
+        while (!nodes.isEmpty()) {
+            TreeNode cur = nodes.pop();
+            nums.add(cur.val);
+            if (cur.right != null) nodes.add(cur.right);
+            if (cur.left != null) nodes.add(cur.left);
+        }
+        return nums;
+    }
+
+    // 中序遍历 递归
+    public List<Integer> inorderTraversal(TreeNode root) {
+        if (root == null) return new LinkedList<>();
+        if (root.left != null) inorderTraversal(root.left);
+        nums.add(root.val);
+        if (root.right != null) inorderTraversal(root.right);
+        return nums;
+    }
+
+    // 中序遍历 非递归
+    /*
+     * @Author Whale Feng
+     * @Description
+     * //TODO 中序遍历 左中右 使用栈，将每个节点的左节点通过while循环全部放入栈内，
+     *    而后访问栈中节点，此时访问的节点一定位于树的最左侧，而后将其右节点放入
+     * @Date 19:46 2022/3/26
+     * @Param [root]
+     * @return java.util.List<java.lang.Integer>
+     **/
+    public List<Integer> inorderTraversalNon(TreeNode root) {
+        if (root == null) return new LinkedList<>();
+        Stack<TreeNode> nodes = new Stack<>();
+        TreeNode cur = root;
+        nodes.add(root);
+        while (cur != null || !nodes.isEmpty()) {
+            while (cur != null) {
+                nodes.add(cur);
+                cur = cur.left;
+            }
+
+            if (!nodes.isEmpty()) {
+                cur = nodes.pop();
+                nums.add(cur.val);
+                cur = cur.right;
+            }
+        }
+        return nums;
+    }
+
+    // 后序遍历 递归
+    public List<Integer> postorderTraversal(TreeNode root) {
+        if (root == null) return new LinkedList<>();
+        if (root.left != null) inorderTraversal(root.left);
+        if (root.right != null) inorderTraversal(root.right);
+        nums.add(root.val);
+        return nums;
+    }
+
+    // 后序遍历 非递归
+    /*
+     * @Author Whale Feng
+     * @Description
+     * //TODO 后序遍历 左右中
+     * @Date 19:52 2022/3/26
+     * @Param [root]
+     * @return java.util.List<java.lang.Integer>
+     **/
+    public List<Integer> postorderTraversalNon(TreeNode root) {
+        if (root == null) return new LinkedList<>();
+        Stack<TreeNode> nodes = new Stack<>();
+        nodes.add(root);
+        while (!nodes.isEmpty()) {
+            TreeNode cur = nodes.pop();
+            nums.add(cur.val);
+            if (cur.left != null) nodes.add(cur.left);
+            if (cur.right != null) nodes.add(cur.right);
+        }
+        for (int i = 0; i < nums.size() / 2; i++) {
+            int temp = nums.get(i);
+            nums.set(i, nums.get(nums.size() - 1 - i));
+            nums.set(nums.size() - 1 - i, temp);
+        }
+        return nums;
+    }
+
     // 后序遍历
     int cur;
     public boolean verifyPostorder(int[] postorder) {

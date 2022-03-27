@@ -16,7 +16,7 @@ public class Offer35 {
         }
     }
 
-    public Node copyRandomList(Node head) {
+    public Node copyRandomListTest(Node head) {
         if (head == null) return null;
         int length = 0;
         Node node = new Node(head.val);
@@ -40,5 +40,27 @@ public class Offer35 {
         node.random = nodeList.get(length - 1);
 
         return res;
+    }
+
+    public Node copyRandomList(Node head) {
+        if (head == null) return null;
+        HashMap<Node, Node> map = new HashMap<>();
+        Node tmp = head;
+        Node node = new Node(head.val);
+        Node res = node;
+        while (tmp != null) {
+            node = new Node(tmp.val);
+            map.putIfAbsent(tmp, node);
+            node = node.next;
+            tmp = tmp.next;
+        }
+
+        Node fin = res;
+        while (res != null) {
+            res.random = map.get(head).random;
+            res = res.next;
+            head = head.next;
+        }
+        return fin;
     }
 }
