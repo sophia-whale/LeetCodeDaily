@@ -2,6 +2,7 @@ package Offer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Fib {
@@ -130,5 +131,20 @@ public class Fib {
             nums[(j+1) % l] = temp;
         }
         return lists;
+    }
+
+    public static int search(int[] nums, int target) {
+        int count = 0;
+        for (int num : nums) {
+            if (num == target) count++;
+        }
+        return count;
+    }
+
+    public int missingNumber(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i) return i;
+        }
+        return -1;
     }
 }

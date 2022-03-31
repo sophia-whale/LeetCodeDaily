@@ -11,17 +11,24 @@ public class Offer26 {
    }
 
     public static void main(String[] args) {
+       //root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
         TreeNode root = new TreeNode(3);
-        TreeNode rootL = root.left = new TreeNode(9);
-        TreeNode rootR = root.right = new TreeNode(20);
+        TreeNode rootL = root.left = new TreeNode(5);
+        TreeNode rootR = root.right = new TreeNode(1);
         rootL.left = new TreeNode(6);
-        rootR.left = new TreeNode(15);
-        rootR.right = new TreeNode(7);
+        rootL.right = new TreeNode(2);
+        rootL.right.left = new TreeNode(7);
+        rootL.right.right = new TreeNode(4);
+        rootR.left = new TreeNode(0);
+        rootR.right = new TreeNode(8);
         List<List<Integer>> lists = levelOrderEnd(root);
         for (List<Integer> cur: lists) {
             System.out.println(cur);
         }
-
+        TreeNode p = new TreeNode(5);
+        TreeNode q = new TreeNode(4);
+        TreeNode res = lowestCommonAncestor(root, p, q);
+        System.out.println(res.val);
     }
 
     public boolean isSubStructure(TreeNode A, TreeNode B) {
@@ -293,4 +300,41 @@ public class Offer26 {
         build(postorder, base, high);// 先构建右子树
         build(postorder, low, base);// 再构建左子树
     }
+
+    static boolean flag;
+    static TreeNode res;
+    static int m,n;
+    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        // 后序遍历如果当前节点正确且左右子树中有一个正确 或 当前节点的左右子树同时正确
+        if (root == null || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p ,q);
+        if(left == null && right == null) return null;
+        if (left == null) return right;
+        if (right == null) return left;
+        return root;
+    }
+
+    public static TreeNode postorder(TreeNode root) {
+        if (flag) return null;
+        if (root == null) return null;
+        TreeNode left = postorder(root.left);
+        TreeNode right = postorder(root.right);
+        if (left != null && right != null) {
+            res = root;
+            return root;
+        } else if (root.val == m || root.val == n) {
+            if (left != null || right != null) {
+                res = root;
+                flag = true;
+            }
+            return root;
+        }
+        if (!flag) {
+            if (left != null) return left;
+            if (right != null) return right;
+        }
+        return null;
+    }
+
 }
