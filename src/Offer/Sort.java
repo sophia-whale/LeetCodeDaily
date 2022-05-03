@@ -1,17 +1,35 @@
 package Offer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Sort {
     public static void main(String[] args) {
         int[] nums = {5,1,1,2,0,0};
-        quickSort(nums, 0, nums.length - 1);
-        Arrays.sort(nums);
+        shell(nums);
         System.out.println(Arrays.toString(nums));
+        directInsert(nums);
+        selection(nums);
+        System.out.println(Arrays.toString(nums));
+        quickSort(nums, 0, nums.length - 1);
+        System.out.println(Arrays.toString(nums));
+        hanoi(8, "H1", "H2", "H3");
+    }
+
+    public static void hanoi(int n, String from, String buffer, String to) {
+        if (n == 1) {
+            System.out.println("from " + from + " to " + to);
+            return;
+        }
+
+        hanoi(n - 1, from, to, buffer);
+        hanoi(1, from, buffer, to);
+        hanoi(n - 1, buffer, from, to);
     }
 
     // 直接插入
-    public static int[] directInsert(int[] nums) {
+    public static void directInsert(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             int cur = nums[i];
             int j;
@@ -20,8 +38,8 @@ public class Sort {
             }
             nums[j + 1] = cur;
         }
-        return nums;
     }
+
     // 折半插入
     public static int[] binaryInsert(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
@@ -41,7 +59,28 @@ public class Sort {
         }
         return nums;
     }
+
     // 希尔排序
+    public static void shell(int[] nums) {
+        int n = nums.length;
+        int h = 1;
+
+        while (h < n/3) {
+            h = 3 * h + 1;
+        }
+
+        while (h >= 1) {
+            for (int i = h; i < n; i++) {
+                for (int j = i; j >= h && nums[j] < nums[j - h]; j-=h) {
+                    int temp = nums[j];
+                    nums[j] = nums[j - 1];
+                    nums[j - 1] = temp;
+                }
+            }
+            h = h/3;
+        }
+    }
+
     // 冒泡排序
     public static int[] bubbleSort(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
@@ -80,9 +119,29 @@ public class Sort {
         quickSort(nums, low, left - 1);
         quickSort(nums, left + 1, high);
     }
+
     // 简单选择排序
+    public static void selection(int[] nums) {
+        int n = nums.length;
+        for (int i = 0; i < n - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < n; j++) {
+                if (nums[j] < nums[min]) min = j;
+            }
+            int temp = nums[i];
+            nums[i] = nums[min];
+            nums[min] = temp;
+        }
+    }
+
     // 堆排序
+
     // 归并排序
+    public static void mergeSort(int[] nums) {
+
+    }
+
     // 基数排序
+
     // 桶排序
 }
